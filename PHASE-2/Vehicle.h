@@ -9,6 +9,7 @@ class Vehicle {
     private:
         string vehicle_Type;
         int vehicle_registration_number;
+        bool isEmergencyVehicle;
     public:
         Vehicle();
         void inputVehicle();
