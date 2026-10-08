@@ -7,7 +7,7 @@ Vehicle::Vehicle() {
 }
 
 void Vehicle::inputVehicle() {
-    cout << "Enter vehicle registration number: ";
+    cout << "\nEnter vehicle registration number: ";
     cin >> vehicle_registration_number;
     cout << "Enter vehicle type: ";
     cin >> vehicle_Type;
@@ -16,7 +16,7 @@ void Vehicle::inputVehicle() {
 }
 
 void Vehicle::displayVehicle() {
-    cout << "Vehicle Registration Number: " << vehicle_registration_number << endl;
+    cout << "\nVehicle Registration Number: " << vehicle_registration_number << endl;
     cout << "Vehicle Type: " << vehicle_Type << endl;
     cout << "Is Emergency Vehicle: ";
     if(isEmergencyVehicle) 

@@ -6,7 +6,7 @@ Graph::Graph() {
 }
 
 void Graph::inputRoad() {
-    cout << "Enter junction 1: ";
+    cout << "\nEnter junction 1: ";
     cin >> junction1;
     cout << "Enter junction 2: ";
     cin >> junction2;
