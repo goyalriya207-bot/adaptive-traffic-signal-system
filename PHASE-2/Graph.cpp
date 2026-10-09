@@ -3,6 +3,7 @@
 Graph::Graph() {
     junction1 = "";
     junction2 = "";
+    roadName = "";
 }
 
 void Graph::inputRoad() {
@@ -10,8 +11,11 @@ void Graph::inputRoad() {
     cin >> junction1;
     cout << "Enter junction 2: ";
     cin >> junction2;
+    cout << "Enter road name: ";
+    cin >> roadName;
 }
 
 void Graph::displayRoad() {
+    cout << "\nRoad Name: " << roadName << endl;
     cout << "Road connection: " << junction1 << " --> " << junction2 << endl;
 }

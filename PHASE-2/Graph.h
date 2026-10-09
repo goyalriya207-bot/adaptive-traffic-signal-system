@@ -9,6 +9,7 @@ class Graph{
     private:
         string junction1;
         string junction2;
+        string roadName;
     public:
         Graph();
         void inputRoad();
