@@ -10,6 +10,8 @@ private:
     int signal_ID;
     string signal_Status; //Red, Green, Yellow
     int greenLightDuration;
+    int redLightDuration;
+    int yellowLightDuration;
 public:
     TrafficSignal();
     void inputSignal();
