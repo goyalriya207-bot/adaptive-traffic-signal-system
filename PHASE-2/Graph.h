@@ -10,6 +10,7 @@ class Graph{
         string junction1;
         string junction2;
         string roadName;
+        int distance;
     public:
         Graph();
         void inputRoad();

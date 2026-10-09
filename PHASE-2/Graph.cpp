@@ -4,6 +4,7 @@ Graph::Graph() {
     junction1 = "";
     junction2 = "";
     roadName = "";
+    distance = 0;
 }
 
 void Graph::inputRoad() {
@@ -13,9 +14,12 @@ void Graph::inputRoad() {
     cin >> junction2;
     cout << "Enter road name: ";
     cin >> roadName;
+    cout << "Enter distance between junctions (in km): ";
+    cin >> distance;
 }
 
 void Graph::displayRoad() {
     cout << "\nRoad Name: " << roadName << endl;
     cout << "Road connection: " << junction1 << " --> " << junction2 << endl;
+    cout << "Distance: " << distance << " Km" << endl;
 }
