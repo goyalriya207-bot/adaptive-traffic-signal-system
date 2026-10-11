@@ -10,21 +10,9 @@ Vehicle::Vehicle()
     isEmergencyVehicle = false;
 }
 
+
 void Vehicle::inputVehicle()
 {
-    // Input vehicle ID
-    do
-    {
-        cout << "\nEnter unique system Vehicle ID: ";
-        cin >> vehicleID;
-
-        if (vehicleID.empty())
-        {
-            cout << "Vehicle ID cannot be empty. Try again.\n";
-        }
-
-    } while (vehicleID.empty());
-
     // Input and validate vehicle type
     do
     {
@@ -63,7 +51,6 @@ void Vehicle::inputVehicle()
 
         cout << "Bicycle does not require a motor vehicle "
              << "registration number.\n";
-        cout << "Normal vehicle registered.\n";
     }
     else
     {
@@ -87,15 +74,14 @@ void Vehicle::inputVehicle()
             vehicle_Type == "PoliceVehicle")
         {
             isEmergencyVehicle = true;
-            cout << "Emergency-response vehicle identified.\n";
         }
         else
         {
             isEmergencyVehicle = false;
-            cout << "Normal vehicle registered.\n";
         }
     }
 }
+
 
 void Vehicle::displayVehicle()
 {
@@ -120,4 +106,20 @@ void Vehicle::displayVehicle()
         {
             cout << "No" << endl;
         }
+}
+
+string Vehicle:: get_vehicle_id(){
+     return vehicleID;
+}
+
+string Vehicle::inputVehicleID()
+{
+    cout << "\nEnter unique system Vehicle ID: ";
+    cin >> vehicleID;
+    return vehicleID;
+}
+
+string Vehicle::get_vehicle_registration_number(){
+       
+    return  vehicle_registration_number;
 }
