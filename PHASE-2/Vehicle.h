@@ -5,15 +5,21 @@
 #include <string>
 using namespace std;
 
-class Vehicle {
-    private:
-        string vehicle_Type;
-        int vehicle_registration_number;
-        bool isEmergencyVehicle;
-    public:
-        Vehicle();
-        void inputVehicle();
-        void displayVehicle();
+class Vehicle
+{
+private:
+    string vehicleID;
+    string vehicle_Type;
+    string vehicle_registration_number;
+    bool isEmergencyVehicle;
+   
+    
+
+public:
+    Vehicle();
+
+    void inputVehicle();
+    void displayVehicle();
 };
 
 #endif
