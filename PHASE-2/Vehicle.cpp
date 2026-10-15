@@ -123,3 +123,12 @@ string Vehicle::get_vehicle_registration_number(){
        
     return  vehicle_registration_number;
 }
+string Vehicle::get_vehicle_type()
+{
+    return vehicle_Type;
+}
+
+bool Vehicle::is_emergency_vehicle()
+{
+    return isEmergencyVehicle;
+}

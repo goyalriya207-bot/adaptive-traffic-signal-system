@@ -21,6 +21,8 @@ public:
     string inputVehicleID();
     string get_vehicle_id();  // getter method to access the vehicle id for checking duplication
     string get_vehicle_registration_number();
+    string get_vehicle_type();
+    bool is_emergency_vehicle();
 };
 
 #endif

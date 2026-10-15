@@ -71,7 +71,7 @@ int main()
 
                         for (int j = 0; j < static_cast<int>(vehicles.size()); j++)
                         {
-                            if (enteredID == vehicles[j].get_vehicle_id())
+                            if (enteredID == vehicles[j].get_vehicle_id ())
                             {
                                 cout << "Duplicate Vehicle ID! "
                                      << "Please enter another ID.\n";
@@ -179,29 +179,176 @@ int main()
 
 
             // -------- OPTION 5: UPDATE VEHICLE --------
+            
             case 5:
-                cout << "Update vehicle details is not implemented yet.\n";
+            {
+                string searchID;
+                bool found = false;
+
+                cout << "Enter Vehicle ID to update: ";
+                cin >> searchID;
+
+                for (int i = 0; i < static_cast<int>(vehicles.size()); i++)
+                {
+                    if (searchID == vehicles[i].get_vehicle_id())
+                    {
+                        cout << "\nVehicle found! Existing details:\n";
+                        vehicles[i].displayVehicle();
+
+                        cout << "\nEnter updated vehicle details:\n";
+                        vehicles[i].inputVehicle();
+
+                        cout << "\nVehicle details updated successfully.\n";
+
+                        found = true;
+                        break;
+                    }
+                }
+
+                if (!found)
+                {
+                    cout << "Vehicle ID not found. Cannot update details.\n";
+                }
+
                 break;
+            }
+
 
             // -------- OPTION 6: REMOVE VEHICLE --------
+             
             case 6:
-                cout << "Remove vehicle is not implemented yet.\n";
+            {
+                string searchID;
+                char confirmation;
+                bool found = false;
+
+                cout << "Enter Vehicle ID to remove: ";
+                cin >> searchID;
+
+                for (int i = 0; i < static_cast<int>(vehicles.size()); i++)
+                {
+                    if (searchID == vehicles[i].get_vehicle_id())
+                    {
+                        cout << "\nVehicle found:\n";
+                        vehicles[i].displayVehicle();
+
+                        cout << "\nAre you sure you want to remove this vehicle? (Y/N): ";
+                        cin >> confirmation;
+
+                        if (confirmation == 'Y' || confirmation == 'y')
+                        {
+                            vehicles.erase(vehicles.begin() + i);
+                            cout << "Vehicle removed successfully.\n";
+                        }
+                        else
+                        {
+                            cout << "Vehicle removal cancelled.\n";
+                        }
+
+                        found = true;
+                        break;
+                    }
+                }
+
+                if (!found)
+                {
+                    cout << "Vehicle ID not found. Cannot remove vehicle.\n";
+                }
+
                 break;
+            }
 
             // -------- OPTION 7: VEHICLE STATISTICS --------
+             
             case 7:
-                cout << "Vehicle statistics are not implemented yet.\n";
+            {
+                int totalVehicles = static_cast<int>(vehicles.size());
+                int normalVehicles = 0;
+                int emergencyVehicles = 0;
+
+                int carCount = 0;
+                int busCount = 0;
+                int bikeCount = 0;
+                int bicycleCount = 0;
+                int truckCount = 0;
+                int ambulanceCount = 0;
+                int fireTruckCount = 0;
+                int policeVehicleCount = 0;
+
+                if (vehicles.empty())
+                {
+                    cout << "No vehicles available for statistics.\n";
+                    break;
+                }
+
+                for (int i = 0; i < totalVehicles; i++)
+                {
+                    if (vehicles[i].get_vehicle_type() == "Car")
+                        carCount++;
+                    else if (vehicles[i].get_vehicle_type() == "Bus")
+                        busCount++;
+                    else if (vehicles[i].get_vehicle_type() == "Bike")
+                        bikeCount++;
+                    else if (vehicles[i].get_vehicle_type() == "Bicycle")
+                        bicycleCount++;
+                    else if (vehicles[i].get_vehicle_type() == "Truck")
+                        truckCount++;
+                    else if (vehicles[i].get_vehicle_type() == "Ambulance")
+                        ambulanceCount++;
+                    else if (vehicles[i].get_vehicle_type() == "FireTruck")
+                        fireTruckCount++;
+                    else if (vehicles[i].get_vehicle_type() == "PoliceVehicle")
+                        policeVehicleCount++;
+
+                    if (vehicles[i].is_emergency_vehicle())
+                        emergencyVehicles++;
+                    else
+                        normalVehicles++;
+                }
+
+                cout << "\n===== VEHICLE STATISTICS =====\n";
+                cout << "Total Vehicles: " << totalVehicles << '\n';
+                cout << "Normal Vehicles: " << normalVehicles << '\n';
+                cout << "Emergency Vehicles: " << emergencyVehicles << '\n';
+
+                cout << "\n--- Vehicle Type Breakdown ---\n";
+                cout << "Cars: " << carCount << '\n';
+                cout << "Buses: " << busCount << '\n';
+                cout << "Bikes: " << bikeCount << '\n';
+                cout << "Bicycles: " << bicycleCount << '\n';
+                cout << "Trucks: " << truckCount << '\n';
+                cout << "Ambulances: " << ambulanceCount << '\n';
+                cout << "Fire Trucks: " << fireTruckCount << '\n';
+                cout << "Police Vehicles: " << policeVehicleCount << '\n';
+
                 break;
+            }
+ 
 
             // -------- OPTION 8: SAVE VEHICLES --------
+            
             case 8:
-                cout << "Vehicle-specific saving needs FileManager integration.\n";
+            {
+                cout << "Vehicle data saving will be handled "
+                    << "through the File Manager module.\n";
+                cout << "File Manager integration is pending.\n";
+
                 break;
+            }
+
 
             // -------- OPTION 9: LOAD VEHICLES --------
+          
             case 9:
-                cout << "Vehicle-specific loading needs FileManager integration.\n";
+            {
+                cout << "Vehicle data loading will be handled "
+                    << "through the File Manager module.\n";
+
+                cout << "File Manager integration is pending.\n";
+
                 break;
+            }
+
 
             // -------- EXIT VEHICLE MENU --------
             case 0:
@@ -218,35 +365,7 @@ int main()
     // ---------------- ROUTE MODULE ----------------
     // Existing Graph module operations can continue here.
 
-    int no_of_roads;
-
-    cout << "\nEnter number of roads (max 20): ";
-    cin >> no_of_roads;
-
-    if (no_of_roads < 1 || no_of_roads > 20)
-    {
-        cout << "Invalid number of roads. "
-             << "Please enter a number between 1 and 20.\n";
-
-        return 1;
-    }
-
-    Graph roads[20];
-
-    for (int i = 0; i < no_of_roads; i++)
-    {
-        cout << "\nEnter details for road " << i + 1 << ":\n";
-        roads[i].inputRoad();
-    }
-
-    cout << "\n===== ROAD DETAILS =====\n";
-
-    for (int i = 0; i < no_of_roads; i++)
-    {
-        roads[i].displayRoad();
-    }
-
-
+    
     // ---------------- TRAFFIC SIGNAL MODULE ----------------
 
     TrafficSignal t1;
