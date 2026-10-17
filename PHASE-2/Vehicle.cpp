@@ -1,6 +1,5 @@
 
 #include "Vehicle.h"
-
 // Default constructor
 Vehicle::Vehicle()
 {

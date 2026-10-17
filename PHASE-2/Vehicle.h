@@ -23,6 +23,7 @@ public:
     string get_vehicle_registration_number();
     string get_vehicle_type();
     bool is_emergency_vehicle();
+    
 };
 
 #endif
