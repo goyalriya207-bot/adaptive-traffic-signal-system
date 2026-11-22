@@ -1,8 +1,8 @@
-# Adaptive Traffic System With Emergency Evacuation Support
+# Adaptive Traffic Signal System With Emergency Evacuation Support
 
 ## Brief Description
 
-Adaptive Traffic System With Emergency Evacuation Support is a project developed using C++ and web technologies. It demonstrates vehicle management, route calculation, traffic-condition visualization and emergency response support.
+Adaptive Traffic Signal System With Emergency Evacuation Support is a project developed using C++ and web technologies. It demonstrates vehicle management, route calculation, traffic-condition visualization and emergency response support.
 
 The project consists of two standalone C++ programs, `addvehicle.cpp` and `addemergency.cpp`, along with a web-based frontend developed using HTML, CSS and JavaScript.
 
