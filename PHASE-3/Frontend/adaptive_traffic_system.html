@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Adaptive Traffic System | Dehradun</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="shell">
+  <aside class="sidebar">
+    <div class="brand">
+      <span class="brand-icon">✦</span>
+      <div><b>ADAPTIVE TRAFFIC</b><small>EMERGENCY SUPPORT</small></div>
+    </div>
+
+    <p class="section-label">WORKSPACE</p>
+    <button class="nav active" data-scroll="dashboard">▦　Live Dashboard</button>
+    <button class="nav" data-scroll="routePlanner">⌁　Route Planner</button>
+    <button class="nav" data-scroll="trafficPanel">◉　Traffic Overview</button>
+
+    <p class="section-label">SYSTEM</p>
+    <div class="system">
+      <i></i>
+      <div><b>System Online</b><small>Illustrative demo traffic</small></div>
+    </div>
+
+    <div class="side-foot">● Frontend demo<small>Sample data only</small></div>
+  </aside>
+
+  <main id="dashboard">
+    <header class="topbar">
+      <div>
+        <p class="eyebrow">DEHRADUN CITY NETWORK</p>
+        <h1>Adaptive Traffic System</h1>
+        <p class="subtitle">Traffic monitoring and emergency evacuation support</p>
+      </div>
+      <div class="header-right">
+        <span class="pill">● DEMO MODE</span>
+        <span id="clock">--:--</span>
+      </div>
+    </header>
+
+    <section class="metrics">
+      <article class="metric">
+        <small>MONITORED JUNCTIONS</small>
+        <strong>15</strong>
+        <p>Across the Dehradun network</p>
+      </article>
+      <article class="metric">
+        <small>ROAD SEGMENTS</small>
+        <strong id="roadCount">50</strong>
+        <p>Connected road links</p>
+      </article>
+      <article class="metric">
+        <small>NETWORK TRAFFIC</small>
+        <strong id="overallTraffic" class="yellow">Moderate</strong>
+        <p>Illustrative sample conditions</p>
+      </article>
+      <article class="metric">
+        <small>EMERGENCY SUPPORT</small>
+        <strong class="green">Ready</strong>
+        <p>Route planning available</p>
+      </article>
+    </section>
+
+    <section class="primary-grid">
+      <article class="panel map-panel">
+        <div class="panel-head">
+          <div>
+            <h2>City Network Map</h2>
+            <p>Dehradun · Connected road network</p>
+          </div>
+          <span class="tag">NETWORK VIEW</span>
+        </div>
+
+        <div class="map-viewport">
+          <div class="legend">
+            <b>ROAD LEGEND</b>
+            <span><i class="line-key route-key"></i> Suggested route</span>
+            <span><i class="dot low-key"></i> Low congestion</span>
+            <span><i class="dot mod-key"></i> Moderate</span>
+            <span><i class="dot high-key"></i> High</span>
+            <span><i class="dot full-key"></i> Full</span>
+          </div>
+
+          <svg id="networkSvg" viewBox="0 0 900 650"
+               role="img" aria-label="Dehradun road network"></svg>
+
+          <span class="map-stamp">SCHEMATIC NETWORK · NOT TO SCALE</span>
+        </div>
+
+        <div class="map-footer">
+          <span>● 35 locations</span>
+          <span>Road color = congestion</span>
+          <button id="resetMap" type="button">Reset route ↗</button>
+        </div>
+      </article>
+
+      <aside class="panel actions">
+        <div class="panel-head">
+          <div><h2>Quick Actions</h2><p>Start a traffic operation</p></div>
+          <span class="spark">✦</span>
+        </div>
+
+        <button class="action" id="addVehicle" type="button">
+          <span class="action-icon">＋</span>
+          <span><b>Add Vehicle</b><small>Register a vehicle and plan a route</small></span>
+          <strong>›</strong>
+        </button>
+
+        <button class="action emergency" id="addEmergency" type="button">
+          <span class="action-icon">✚</span>
+          <span><b>Add Emergency</b><small>Prioritize an emergency response</small></span>
+          <strong>›</strong>
+        </button>
+
+        <div class="planner" id="routePlanner">
+          <div class="planner-head">
+            <b>ROUTE PLANNER</b>
+            <span class="tag">READY</span>
+          </div>
+
+          <label for="source">SOURCE LOCATION</label>
+          <select id="source"></select>
+
+          <label for="destination">DESTINATION</label>
+          <select id="destination"></select>
+
+          <label for="plannerVehicle">VEHICLE TYPE</label>
+          <select id="plannerVehicle">
+            <option>Car</option>
+            <option>Truck</option>
+            <option>Bus</option>
+            <option>Ambulance</option>
+            <option>Fire Truck</option>
+            <option>Police Van</option>
+            <option>Bike</option>
+            <option>Bicycle</option>
+          </select>
+
+          <button class="primary" id="findRoute" type="button">
+            ⌁ Find Best Route <span>→</span>
+          </button>
+          <p class="helper">Uses illustrative sample traffic values.</p>
+          <p id="plannerError" class="error"></p>
+        </div>
+      </aside>
+    </section>
+
+    <section class="bottom-grid">
+      <article class="panel">
+        <div class="panel-head">
+          <div>
+            <h2>Route Analysis</h2>
+            <p id="routeSubtitle">Choose a source and destination to begin</p>
+          </div>
+          <span class="tag" id="routeStatus">AWAITING ROUTE</span>
+        </div>
+
+        <div class="route-stats">
+          <div><small>TOTAL DISTANCE</small><h3 id="distance">— <em>km</em></h3></div>
+          <div><small>ESTIMATED TIME</small><h3 id="time">— <em>min</em></h3></div>
+          <div><small>ROAD SEGMENTS</small><h3 id="segmentCount">—</h3></div>
+        </div>
+
+        <div id="routeResult" class="route-result">
+          Your suggested path will appear here after route calculation.
+        </div>
+      </article>
+
+      <article class="panel" id="trafficPanel">
+        <div class="panel-head">
+          <div>
+            <h2>Traffic Segments</h2>
+            <p>Congestion across the sample road network</p>
+          </div>
+          <span class="tag">OVERVIEW</span>
+        </div>
+
+        <div class="traffic-row">
+          <i class="bar low-bar"></i>
+          <div><b>Low congestion</b><small>Below 50% capacity</small></div>
+          <strong id="lowCount">0</strong>
+        </div>
+        <div class="traffic-row">
+          <i class="bar mod-bar"></i>
+          <div><b>Moderate congestion</b><small>50% to below 80%</small></div>
+          <strong id="moderateCount">0</strong>
+        </div>
+        <div class="traffic-row">
+          <i class="bar high-bar"></i>
+          <div><b>High congestion</b><small>80% to below 100%</small></div>
+          <strong id="highCount">0</strong>
+        </div>
+        <div class="traffic-row">
+          <i class="bar full-bar"></i>
+          <div><b>At capacity</b><small>100% or more</small></div>
+          <strong id="fullCount">0</strong>
+        </div>
+
+        <div class="segments" id="segmentDetails">
+          <b>Selected route segments</b>
+          <p>Calculate a route to see road traffic status.</p>
+        </div>
+      </article>
+    </section>
+
+    <footer>
+      <span>ADAPTIVE TRAFFIC SYSTEM &amp; EMERGENCY EVACUATION SUPPORT</span>
+      <span>Educational prototype · Sample data only</span>
+    </footer>
+  </main>
+</div>
+
+<div class="backdrop" id="modalBackdrop" hidden>
+  <section class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <div class="modal-head">
+      <div>
+        <p class="eyebrow">TRAFFIC OPERATIONS</p>
+        <h2 id="modalTitle">Add Vehicle</h2>
+      </div>
+      <button id="closeModal" class="close" type="button" aria-label="Close">×</button>
+    </div>
+
+    <form id="vehicleForm">
+      <label for="vehicleType">VEHICLE TYPE</label>
+      <select id="vehicleType">
+        <option>Car</option>
+        <option>Truck</option>
+        <option>Bus</option>
+        <option>Ambulance</option>
+        <option>Fire Truck</option>
+        <option>Police Van</option>
+        <option>Bike</option>
+        <option>Bicycle</option>
+      </select>
+
+      <div id="registrationGroup">
+        <label for="registration">VEHICLE REGISTRATION</label>
+        <input id="registration" placeholder="e.g. DL01AB1234" autocomplete="off">
+        <small class="help">Start with two letters. Use letters and numbers only.</small>
+      </div>
+
+      <label for="modalSource">SOURCE LOCATION</label>
+      <select id="modalSource"></select>
+
+      <label for="modalDestination">DESTINATION</label>
+      <select id="modalDestination"></select>
+
+      <p id="formError" class="error"></p>
+      <button class="primary" id="submitButton" type="submit">Plan Route →</button>
+      <p class="helper">Bicycles do not require a registration number. Demo only; nothing is saved.</p>
+    </form>
+  </section>
+</div>
+
+
+<!-- EMERGENCY REPORTING MODAL -->
+<div class="backdrop" id="emergencyBackdrop" hidden>
+  <section class="modal" role="dialog" aria-modal="true"
+           aria-labelledby="emergencyModalTitle">
+
+    <div class="modal-head">
+      <div>
+        <p class="eyebrow">EMERGENCY OPERATIONS</p>
+        <h2 id="emergencyModalTitle">Report Emergency</h2>
+      </div>
+
+      <button id="closeEmergencyModal" class="close"
+              type="button" aria-label="Close">×</button>
+    </div>
+
+    <form id="emergencyForm">
+
+      <label for="emergencyType">EMERGENCY TYPE</label>
+      <select id="emergencyType" required>
+        <option value="MEDICAL">Medical</option>
+        <option value="FIRE">Fire</option>
+        <option value="EARTHQUAKE">Earthquake</option>
+      </select>
+
+      <label for="emergencyLocation">LOCATION / JUNCTION</label>
+      <select id="emergencyLocation" required>
+        <option value="">Select location</option>
+        <option value="J1">J1 - Clock Tower Chowk</option>
+        <option value="J2">J2 - Prince Chowk</option>
+        <option value="J3">J3 - Saharanpur Chowk</option>
+        <option value="J4">J4 - Balliwala Chowk</option>
+        <option value="J5">J5 - Karghi Chowk</option>
+        <option value="J6">J6 - Vidhan Sabha Twin Junction</option>
+        <option value="J7">J7 - ISBT Chowk</option>
+        <option value="J8">J8 - Bindal River Junction</option>
+        <option value="J9">J9 - Jogiwala Chowk</option>
+        <option value="J10">J10 - Araghar Junction</option>
+        <option value="J11">J11 - Ballupur Chowk</option>
+        <option value="J12">J12 - Ashley Hall Junction</option>
+        <option value="J13">J13 - Kishan Nagar Junction</option>
+        <option value="J14">J14 - Sahastradhara Crossing</option>
+        <option value="J15">J15 - Employment Office Crossing</option>
+      </select>
+
+      <!-- MEDICAL FIELDS -->
+      <div id="medicalFields">
+        <label for="medicalInjured">NUMBER OF INJURED PEOPLE</label>
+        <input type="number" id="medicalInjured"
+               min="1" placeholder="Enter injured people">
+      </div>
+
+      <!-- FIRE FIELDS -->
+      <div id="fireFields" hidden>
+        <label for="fireSeverity">FIRE SEVERITY</label>
+        <select id="fireSeverity">
+          <option value="1">Low</option>
+          <option value="2">Medium</option>
+          <option value="3">High</option>
+        </select>
+
+        <label for="fireInjured">NUMBER OF INJURED PEOPLE</label>
+        <input type="number" id="fireInjured"
+               min="0" value="0">
+
+        <label for="fireTrapped">PEOPLE TRAPPED INSIDE</label>
+        <input type="number" id="fireTrapped"
+               min="0" value="0">
+      </div>
+
+      <!-- EARTHQUAKE FIELDS -->
+      <div id="earthquakeFields" hidden>
+        <label for="earthquakeTrapped">PEOPLE TRAPPED</label>
+        <input type="number" id="earthquakeTrapped"
+               min="0" value="0">
+
+        <label for="earthquakeInjured">NUMBER OF INJURED PEOPLE</label>
+        <input type="number" id="earthquakeInjured"
+               min="0" value="0">
+
+        <label for="earthquakeEvacuation">
+          ADDITIONAL PEOPLE REQUIRING EVACUATION
+        </label>
+        <input type="number" id="earthquakeEvacuation"
+               min="0" value="0">
+      </div>
+
+      <label for="emergencyDescription">EMERGENCY DESCRIPTION</label>
+      <input type="text" id="emergencyDescription"
+             placeholder="Briefly describe the emergency"
+             maxlength="150" required>
+
+      <p id="emergencyFormError" class="error"></p>
+
+      <button class="primary" type="submit">
+        Submit Emergency →
+      </button>
+
+      <p class="helper">
+        Emergency details will be processed by the response system.
+      </p>
+
+    </form>
+  </section>
+</div>
+<!-- EMERGENCY RESPONSE RESULT MODAL -->
+<div class="backdrop" id="responseBackdrop" hidden>
+
+  <section class="modal response-modal"
+           role="dialog"
+           aria-modal="true"
+           aria-labelledby="responseTitle">
+
+    <div class="modal-head">
+      <div>
+        <p class="eyebrow">EMERGENCY RESPONSE SYSTEM</p>
+        <h2 id="responseTitle">Emergency Response</h2>
+      </div>
+
+      <button id="closeResponseModal"
+              class="close"
+              type="button"
+              aria-label="Close">×</button>
+    </div>
+
+    <!-- RESPONSE STATUS -->
+    <div id="responseStatus" class="response-status">
+      <h3 id="responseHeading">Emergency Report Received</h3>
+      <p id="responseMessage">
+        Your emergency report is being processed.
+      </p>
+    </div>
+
+    <!-- RESPONSE DETAILS -->
+    <div id="responseDetails">
+
+      <h3>Response Details</h3>
+
+      <div id="assignedResources">
+        <!-- Assigned resources will appear here -->
+      </div>
+
+    </div>
+
+    <button type="button"
+            class="primary"
+            id="responseDone">
+      Done
+    </button>
+
+  </section>
+</div>
+<script src="script.js"></script>
+</body>
+</html>
