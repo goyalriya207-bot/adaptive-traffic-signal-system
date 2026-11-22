@@ -14,6 +14,9 @@ The frontend provides an interactive interface for adding vehicles, viewing rout
 
 ---
 
+## Live Demo
+View live page on: http://127.0.0.1:5500/Frontend/adaptive_traffic_system.html
+
 ## Problem Statement / Objectives
 
 Traffic congestion and delays can affect the movement of vehicles, especially during emergency situations. Emergency vehicles such as ambulances and fire trucks require suitable routes and timely resource allocation.
